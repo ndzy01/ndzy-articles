@@ -16,50 +16,54 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="mt-16">
-      <ArticleSelect
-        open={v}
-        setOpen={setV}
-        data={state.articles}
-        value={state.article?.id ? [state.article?.id] : []}
-        onChange={(v) => {
-          dispatch({ type: 'UPDATE', payload: { article: findNodeById(state.articles, v[0]) } });
-        }}
-        title={state.article?.title}
-      />
-      <button
-        className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        onClick={() => {
-          dispatch({ type: 'UPDATE', payload: { article: {} } });
-          setOpen(true);
-        }}
-      >
-        新增
-      </button>
-      <button
-        className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        onClick={() => {
-          if (!state.article?.id) {
-            return;
-          }
+    <div>
+      <div className="ml-16">
+        <ArticleSelect
+          open={v}
+          setOpen={setV}
+          data={state.articles}
+          value={state.article?.id ? [state.article?.id] : []}
+          onChange={(v) => {
+            dispatch({ type: 'UPDATE', payload: { article: findNodeById(state.articles, v[0]) } });
+          }}
+          title={state.article?.title}
+        />
+        <div className="hidden md:block">
+          <button
+            className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            onClick={() => {
+              dispatch({ type: 'UPDATE', payload: { article: {} } });
+              setOpen(true);
+            }}
+          >
+            新增
+          </button>
+          <button
+            className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            onClick={() => {
+              if (!state.article?.id) {
+                return;
+              }
 
-          setOpen(true);
-        }}
-      >
-        编辑
-      </button>
-      <button
-        className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        onClick={() => {
-          if (!state.article?.id) {
-            return;
-          }
+              setOpen(true);
+            }}
+          >
+            编辑
+          </button>
+          <button
+            className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            onClick={() => {
+              if (!state.article?.id) {
+                return;
+              }
 
-          del(state.article.id, dispatch);
-        }}
-      >
-        删除
-      </button>
+              del(state.article.id, dispatch);
+            }}
+          >
+            删除
+          </button>
+        </div>
+      </div>
 
       {state.article?.content && <EditorMd type="view" value={state.article?.content} />}
 

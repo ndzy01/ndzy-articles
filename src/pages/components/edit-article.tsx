@@ -11,8 +11,8 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
 
   return (
     <Modal open={open} setOpen={setOpen}>
-      <div className="relative w-full flex min-h-full px-6 lg:px-8">
-        <div className="w-full h-[60vh] xl:h-[90vh]">
+      <div className="relative w-full flex min-h-full px-8">
+        <div className="w-full h-[90vh]">
           <div className="space-y-6">
             {!id && (
               <div>
@@ -78,7 +78,7 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
             </div>
           </div>
         </div>
-        <div className="absolute bottom-[8rem] xl:bottom-0 w-full">
+        <div className="absolute bottom-0 w-full px-8">
           <button
             onClick={() => {
               if (id) {
