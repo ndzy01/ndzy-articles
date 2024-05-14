@@ -12,7 +12,7 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
   return (
     <Modal open={open} setOpen={setOpen}>
       <div className="relative w-full flex min-h-full px-6 lg:px-8">
-        <div className="w-full h=[80vh]">
+        <div className="w-full h=[70vh]">
           <div className="space-y-6">
             {!id && (
               <div>
