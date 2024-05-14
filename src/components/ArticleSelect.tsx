@@ -42,7 +42,7 @@ const ArticleSelect = ({
       <input
         ref={sourceRef}
         id="title"
-        className="px-4 block w-[16rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        className="px-4 block w-[20rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         value={title}
         onClick={() => setOpen(true)}
       />
@@ -52,7 +52,7 @@ const ArticleSelect = ({
           ref={targetRef}
           open={open}
           setOpen={setOpen}
-          className={`w-[16rem] h-[15rem] overflow-y-auto`}
+          className={`w-[20rem] h-[15rem] overflow-y-auto`}
           style={{ position: 'fixed', top: position.top + 40, left: position.left }}
         >
           <RCTree

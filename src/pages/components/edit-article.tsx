@@ -78,7 +78,7 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
             </div>
           </div>
         </div>
-        <div className="absolute bottom-16 xl:bottom-0 w-full">
+        <div className="absolute bottom-[8rem] xl:bottom-0 w-full">
           <button
             onClick={() => {
               if (id) {
