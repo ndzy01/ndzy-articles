@@ -13,6 +13,7 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "axios": "^1.6.8",
     "md-editor-rt": "^4.14.1",
+    "notistack": "^3.0.1",
     "rc-tree": "^5.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

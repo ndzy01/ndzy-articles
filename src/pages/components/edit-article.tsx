@@ -1,17 +1,13 @@
 import { EditorMd } from './editor-md';
 import Modal from '../../components/modal';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ArticleSelect from '../../components/ArticleSelect';
 import { findNodeById } from '../../utils';
 
 const EditArticle = ({ order, title, content, id, open, setOpen, save, create, data, dispatch }: any) => {
-  const [s, setS] = useState<Record<string, any>>({});
+  const [s, setS] = useState<Record<string, any>>({ title, content, order });
   const [v, setV] = useState(false);
   const [a, setA] = useState<string[]>([]);
-
-  useEffect(() => {
-    setS({ title, content, order });
-  }, []);
 
   return (
     <Modal open={open} setOpen={setOpen}>
@@ -85,21 +81,19 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
         <div className="absolute bottom-0 w-full">
           <button
             onClick={() => {
-              setOpen(false);
-
               if (id) {
                 save(id, { ...s, order: Number(s.order), title: String(s.title) }, dispatch);
+                setOpen(false);
               } else {
                 if (a.length > 0) {
                   create({ ...s, order: Number(s.order), title: String(s.title), parentId: a[0] }, dispatch);
-
+                  setOpen(false);
                   return;
                 }
 
                 create({ ...s, order: Number(s.order), title: String(s.title) }, dispatch);
+                setOpen(false);
               }
-
-              setOpen(false);
             }}
             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >

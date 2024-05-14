@@ -61,7 +61,7 @@ export const Home = () => {
         删除
       </button>
 
-      <EditorMd type="view" value={state.article?.content} />
+      {state.article?.content && <EditorMd type="view" value={state.article?.content} />}
 
       {open && (
         <EditArticle

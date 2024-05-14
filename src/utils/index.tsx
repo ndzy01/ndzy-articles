@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestHeaders } from 'axios';
+import { enqueueSnackbar } from 'notistack';
 
 class AxiosService {
   private static instance: AxiosInstance;
@@ -40,23 +41,30 @@ export const createAxiosInstance = (url: string) => {
       const data = res.data;
 
       if (res.data.status === 1) {
-        alert(res.data.msg);
+        enqueueSnackbar(res.data.msg, { variant: 'error', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
       }
 
       if (res.data.status === 0) {
-        alert(res.data.msg);
+        enqueueSnackbar(res.data.msg, { variant: 'success', anchorOrigin: { vertical: 'top', horizontal: 'center' } });
       }
 
       return data;
     },
     (error) => {
       if (error?.response?.data?.statusCode === 401) {
-        alert('登录失效，请重新登陆！');
+        enqueueSnackbar('出错了，请联系管理员', {
+          variant: 'error',
+          anchorOrigin: { vertical: 'top', horizontal: 'center' },
+        });
         return;
       }
 
-      alert('出错了，请联系管理员');
-      // return Promise.reject('出错了，请联系管理员');
+      enqueueSnackbar('出错了，请联系管理员', {
+        variant: 'error',
+        anchorOrigin: { vertical: 'top', horizontal: 'center' },
+      });
+
+      return Promise.reject('出错了，请联系管理员');
     },
   );
 
