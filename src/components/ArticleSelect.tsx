@@ -28,7 +28,7 @@ const ArticleSelect = ({
     <Popover.Root>
       <Popover.Trigger asChild>
         <button
-          className="p-1 w-[20rem] inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA4 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black cursor-default outline-none"
+          className="m-4 p-1 w-[20rem] inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA4 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black cursor-default outline-none"
           aria-label="Update dimensions"
         >
           {title || '请选择'}
