@@ -1,27 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-import Modal from './modal';
+import { useState } from 'react';
 import RCTree from 'rc-tree';
 import 'rc-tree/assets/index.css';
 import { loop } from '../utils';
+import * as Popover from '@radix-ui/react-popover';
+import { Cross2Icon } from './Icon';
 
 const ArticleSelect = ({
   data,
   value,
   onChange,
-  open,
-  setOpen,
   title,
 }: {
   data: any[];
   value: string[];
   onChange: (v: string[]) => void;
-  open: boolean;
-  setOpen: (v: boolean) => void;
   title: string;
 }) => {
-  const sourceRef = useRef(null); // 源元素的ref
-  const targetRef = useRef(null); // 目标元素的ref
-  const [position, setPosition] = useState({ top: 0, left: 0 }); // 存储位置信息
   const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
 
@@ -30,34 +24,20 @@ const ArticleSelect = ({
     setAutoExpandParent(false);
   };
 
-  useEffect(() => {
-    if (sourceRef.current) {
-      const { top, left } = (sourceRef.current as any).getBoundingClientRect();
-      setPosition({ top, left });
-    }
-  }, []);
-
   return (
-    <div className="p-4 relative inline-block">
-      <input
-        ref={sourceRef}
-        id="title"
-        className="px-4 block w-[20rem] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        value={title}
-        onClick={(e) => {
-          e.preventDefault();
-          setOpen(true);
-        }}
-        placeholder="请选择"
-      />
-
-      {open && (
-        <Modal
-          ref={targetRef}
-          open={open}
-          setOpen={setOpen}
-          className={`w-[20rem] h-[15rem] overflow-y-auto`}
-          style={{ position: 'fixed', top: position.top + 40, left: position.left }}
+    <Popover.Root>
+      <Popover.Trigger asChild>
+        <button
+          className="p-1 w-[20rem] inline-flex items-center justify-center text-violet11 bg-white shadow-[0_2px_10px] shadow-blackA4 hover:bg-violet3 focus:shadow-[0_0_0_2px] focus:shadow-black cursor-default outline-none"
+          aria-label="Update dimensions"
+        >
+          {title || '请选择'}
+        </button>
+      </Popover.Trigger>
+      <Popover.Portal>
+        <Popover.Content
+          className="z-[99999] rounded p-5 w-[20rem] bg-white shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2)] focus:shadow-[0_10px_38px_-10px_hsla(206,22%,7%,.35),0_10px_20px_-15px_hsla(206,22%,7%,.2),0_0_0_2px_theme(colors.violet7)] will-change-[transform,opacity] data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+          sideOffset={5}
         >
           <RCTree
             showLine
@@ -68,12 +48,18 @@ const ArticleSelect = ({
             selectedKeys={value}
             onSelect={(keys: any) => {
               onChange(keys || []);
-              setOpen(false);
             }}
           />
-        </Modal>
-      )}
-    </div>
+          <Popover.Close
+            className="rounded-full h-[25px] w-[25px] inline-flex items-center justify-center text-violet11 absolute top-[5px] right-[5px] hover:bg-violet4 focus:shadow-[0_0_0_2px] focus:shadow-violet7 outline-none cursor-default"
+            aria-label="Close"
+          >
+            <Cross2Icon className="h-4 w-4" />
+          </Popover.Close>
+          <Popover.Arrow className="fill-white" />
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 };
 

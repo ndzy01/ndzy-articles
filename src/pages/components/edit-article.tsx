@@ -6,7 +6,6 @@ import { findNodeById } from '../../utils';
 
 const EditArticle = ({ order, title, content, id, open, setOpen, save, create, data, dispatch }: any) => {
   const [s, setS] = useState<Record<string, any>>({ title, content, order });
-  const [v, setV] = useState(false);
   const [a, setA] = useState<string[]>([]);
 
   return (
@@ -21,8 +20,6 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
                 </label>
                 <div className="mt-2">
                   <ArticleSelect
-                    open={v}
-                    setOpen={setV}
                     data={data}
                     value={a}
                     onChange={(v) => setA(v)}

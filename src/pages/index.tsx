@@ -9,7 +9,6 @@ import { findNodeById } from '../utils';
 export const Home = () => {
   const { state, dispatch } = useContext(ReduxContext);
   const [open, setOpen] = useState(false);
-  const [v, setV] = useState(false);
 
   useEffect(() => {
     query(dispatch);
@@ -19,8 +18,6 @@ export const Home = () => {
     <div>
       <div className="ml-16">
         <ArticleSelect
-          open={v}
-          setOpen={setV}
           data={state.articles}
           value={state.article?.id ? [state.article?.id] : []}
           onChange={(v) => {
