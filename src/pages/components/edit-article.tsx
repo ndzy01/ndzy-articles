@@ -88,7 +88,11 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
                 />
               </FormItem>
 
-              <button type="submit" disabled={state.loading}>
+              <button
+                className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                type="submit"
+                disabled={state.loading}
+              >
                 提交
               </button>
             </Form>

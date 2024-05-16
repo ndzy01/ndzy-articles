@@ -1,4 +1,5 @@
 import { Portal } from '../Portal';
+import { v4 as uuidv4 } from 'uuid';
 
 const Modal = ({
   open = false,
@@ -15,8 +16,8 @@ const Modal = ({
   return (
     <Portal>
       {open && (
-        <>
-          <div className="bg-black/20 fixed inset-0" />
+        <div id={'id_protal_' + uuidv4()}>
+          <div className="bg-black/20 fixed inset-0" onClick={() => setOpen(false)} />
           <div
             className={`z-[9999] fixed top-0 left-0 h-[100vh] w-[100vw] rounded-4 bg-white p-4 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none ${className}`}
           >
@@ -36,7 +37,7 @@ const Modal = ({
               </svg>
             </button>
           </div>
-        </>
+        </div>
       )}
     </Portal>
   );
