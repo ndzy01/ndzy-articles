@@ -3,24 +3,19 @@ import { service } from '../utils';
 import Modal from './modal';
 import { Form, FormItem } from './form';
 import { ReduxContext } from '../store';
+import Button from './button';
+import Input from './input';
 
 const Login = () => {
   const { state } = React.useContext(ReduxContext);
   const [open, setOpen] = React.useState(false);
 
-  const Input = (props: any) => {
-    return <input value={props.value} onChange={(e) => props.onChange(e.target.value)} {...props} />;
-  };
-
   return (
     <>
-      <button
-        className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        disabled={state.loading}
-        onClick={() => setOpen(true)}
-      >
+      <Button disabled={state.loading} onClick={() => setOpen(true)}>
         登录
-      </button>
+      </Button>
+
       <Modal open={open} setOpen={setOpen}>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
           <Form

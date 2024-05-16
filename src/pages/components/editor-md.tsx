@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const scrollElement = document.documentElement;
 export const EditorMd = ({ value, onChange, type = 'edit' }: any) => {
-  const id = 'id_' + uuidv4();
+  const id = 'id_md_' + uuidv4();
   return (
     <>
       {type === 'edit' ? (

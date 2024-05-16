@@ -6,6 +6,7 @@ import { Form, FormItem } from '../../components/form';
 import { enqueueSnackbar } from 'notistack';
 import { ReduxContext } from '../../store';
 import { useContext } from 'react';
+import Input from '../../components/input';
 
 const EditArticle = ({ order, title, content, id, open, setOpen, save, create, data, dispatch }: any) => {
   const { state } = useContext(ReduxContext);
@@ -18,10 +19,6 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
         title={props.value && props.value.length > 0 ? findNodeById(props.data, props.value[0]).title : ''}
       />
     );
-  };
-
-  const Input = (props: any) => {
-    return <input value={props.value} onChange={(e) => props.onChange(e.target.value)} {...props} />;
   };
 
   return (

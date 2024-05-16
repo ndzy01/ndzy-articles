@@ -7,6 +7,7 @@ import { del, query, save, create } from './service';
 import { findNodeById } from '../utils';
 import Menu from '../components/Menu';
 import Login from '../components/Login';
+import Button from '../components/button';
 
 export const Home = () => {
   const { state, dispatch } = useContext(ReduxContext);
@@ -20,17 +21,16 @@ export const Home = () => {
     <div>
       <Menu>
         <Login />
-        <button
-          className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        <Button
           onClick={() => {
             dispatch({ type: 'UPDATE', payload: { article: {} } });
             setOpen(true);
           }}
         >
           新增
-        </button>
-        <button
-          className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+        </Button>
+
+        <Button
           onClick={() => {
             if (!state.article?.id) {
               return;
@@ -40,10 +40,9 @@ export const Home = () => {
           }}
         >
           编辑
-        </button>
-        <button
+        </Button>
+        <Button
           disabled={state.loading}
-          className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           onClick={() => {
             if (!state.article?.id) {
               return;
@@ -53,7 +52,7 @@ export const Home = () => {
           }}
         >
           删除
-        </button>
+        </Button>
         <ArticleSelect
           data={state.articles}
           value={state.article?.id ? [state.article?.id] : []}
