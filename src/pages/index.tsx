@@ -49,6 +49,7 @@ export const Home = () => {
             编辑
           </button>
           <button
+            disabled={state.loading}
             className="mx-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
             onClick={() => {
               if (!state.article?.id) {

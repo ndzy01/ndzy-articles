@@ -3,8 +3,10 @@ import { service } from '../utils';
 import Modal from './modal';
 import { Cross2Icon } from './Icon';
 import { Form, FormItem } from './form';
+import { ReduxContext } from '../store';
 
 const Login = () => {
+  const { state } = React.useContext(ReduxContext);
   const [open, setOpen] = React.useState(false);
 
   const Input = (props: any) => {
@@ -62,7 +64,9 @@ const Login = () => {
               />
             </FormItem>
 
-            <button type="submit">提交</button>
+            <button type="submit" disabled={state.loading}>
+              提交
+            </button>
           </Form>
         </div>
       </Modal>

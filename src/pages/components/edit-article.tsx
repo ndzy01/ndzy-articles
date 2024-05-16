@@ -3,8 +3,12 @@ import Modal from '../../components/modal';
 import ArticleSelect from '../../components/ArticleSelect';
 import { findNodeById } from '../../utils';
 import { Form, FormItem } from '../../components/form';
+import { enqueueSnackbar } from 'notistack';
+import { ReduxContext } from '../../store';
+import { useContext } from 'react';
 
 const EditArticle = ({ order, title, content, id, open, setOpen, save, create, data, dispatch }: any) => {
+  const { state } = useContext(ReduxContext);
   const ArticleSelectFormItem = (props: any) => {
     return (
       <ArticleSelect
@@ -28,18 +32,31 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
             <Form
               initialValues={{ title, content, order }}
               onSubmit={(v) => {
-                if (id) {
-                  save(id, { ...v, order: Number(v.order) }, dispatch);
+                if (!v.content) {
+                  enqueueSnackbar('内容不能为空', {
+                    variant: 'error',
+                    anchorOrigin: { vertical: 'top', horizontal: 'center' },
+                  });
                   setOpen(false);
+                  return;
+                }
+
+                if (id) {
+                  save(id, { ...v, order: Number(v.order) }, dispatch).then(() => {
+                    setOpen(false);
+                  });
                 } else {
                   if (v.parentId && v.parentId.length > 0) {
-                    create({ ...v, order: Number(v.order), parentId: v.parentId[0] }, dispatch);
-                    setOpen(false);
+                    create({ ...v, order: Number(v.order), parentId: v.parentId[0] }, dispatch).then(() => {
+                      setOpen(false);
+                    });
+
                     return;
                   }
 
-                  create({ ...v, order: Number(v.order) }, dispatch);
-                  setOpen(false);
+                  create({ ...v, order: Number(v.order) }, dispatch).then(() => {
+                    setOpen(false);
+                  });
                 }
               }}
             >
@@ -71,7 +88,9 @@ const EditArticle = ({ order, title, content, id, open, setOpen, save, create, d
                 />
               </FormItem>
 
-              <button type="submit">提交</button>
+              <button type="submit" disabled={state.loading}>
+                提交
+              </button>
             </Form>
           </div>
         </div>
